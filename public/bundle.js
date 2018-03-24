@@ -61,7 +61,7 @@
 	
 	var _App2 = _interopRequireDefault(_App);
 	
-	var _testData = __webpack_require__(/*! ./testData */ 186);
+	var _testData = __webpack_require__(/*! ./testData */ 187);
 	
 	var _testData2 = _interopRequireDefault(_testData);
 	
@@ -22369,6 +22369,8 @@
 	  value: true
 	});
 	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(/*! react */ 1);
@@ -22378,6 +22380,10 @@
 	var _Header = __webpack_require__(/*! ./Header */ 185);
 	
 	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _ContestPreview = __webpack_require__(/*! ./ContestPreview */ 186);
+	
+	var _ContestPreview2 = _interopRequireDefault(_ContestPreview);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -22426,7 +22432,9 @@
 	        _react2.default.createElement(
 	          'div',
 	          null,
-	          '...'
+	          this.props.contests.map(function (contest) {
+	            return _react2.default.createElement(_ContestPreview2.default, _extends({ key: contest.id }, contest));
+	          })
 	        )
 	      );
 	    }
@@ -22476,6 +22484,44 @@
 
 /***/ }),
 /* 186 */
+/*!******************************************!*\
+  !*** ./src/components/ContestPreview.js ***!
+  \******************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ContestPreview = function ContestPreview(contest) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: "ContestPreview" },
+	    _react2.default.createElement(
+	      "div",
+	      { className: "category-name" },
+	      contest.categoryName
+	    ),
+	    _react2.default.createElement(
+	      "div",
+	      { className: "contest-name" },
+	      contest.contestName
+	    )
+	  );
+	};
+	
+	exports.default = ContestPreview;
+
+/***/ }),
+/* 187 */
 /*!***************************!*\
   !*** ./src/testData.json ***!
   \***************************/

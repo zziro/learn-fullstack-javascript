@@ -1,40 +1,15 @@
-//import config, {nodeEnv, logStars} from './config.js';
-
-//console.log(config, nodeEnv);
-
-//logStars('Function')
-
-//import https from 'https';
-
-/*https.get('https://www.lynda.com', res =>{
-  console.log('Response status code', res.statusCode)
-
-  res.on('data', chunk =>{
-    console.log(chunk.toString());
-  });
-})*/
-
-
-
-
-/*import http from 'http';
-
-/*const server = http.createServer((req, res) => {
-  res.write('Hello HTTP');
-  setTimeout(() => {
-    res.write('I can stream!');
-    res.end();
-  }, 3000);
-});
-
-server.listen(8080);*/
-
-
 import config from './config';
-//import fs from 'fs';
 import express from 'express';
 import apiRouter from './api';
+import sassMiddleware from 'node-sass-middleware';
+import path from 'path';
+
 const server = express();
+
+server.use(sassMiddleware({
+  src: path.join(__dirname, 'sass'),
+  dest: path.join(__dirname, 'public')
+}));
 
 server.set('view engine', 'ejs');
 
@@ -44,11 +19,6 @@ server.get('/', (req, res) => {
   });
 });
 
-/*server.get('/about.html', (req, res) => {
-  fs.readFile('./about.html', (err, data) => {
-    res.send(data.toString());
-  });
-});*/
 server.use('/api', apiRouter);
 server.use(express.static('public'));
 
