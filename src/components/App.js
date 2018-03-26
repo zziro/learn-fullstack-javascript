@@ -11,20 +11,17 @@ class App extends React.Component {
   static propTypes = {
     initialData: React.PropTypes.object.isRequired
   };
-
   state = this.props.initialData;
   componentDidMount() {
 
   }
-
   componentWillUnmount() {
     // clean timers, listeners
   }
-
   fetchContest = (contestId) => {
     pushState(
       { currentContestId: contestId },
-      `/contest/${contestId}`
+      '/contest/${contestId}'
     );
     api.fetchContest(contestId).then(contest => {
       this.setState({
@@ -36,28 +33,40 @@ class App extends React.Component {
       });
     });
   };
-
-  currentContest(){
-      return this.state.contests[this.state.currentContestId];
+  fetchContestList = () => {
+    pushState(
+      { currentContestId: null },
+      '/'
+    );
+    api.fetchContestList().then(contests => {
+      this.setState({
+        currentContestId: null,
+        contests
+      });
+    });
+  };
+  currentContest() {
+    return this.state.contests[this.state.currentContestId];
   }
-
-  pageHeader(){
-    if(this.state.currentContestId){
+  pageHeader() {
+    if (this.state.currentContestId) {
       return this.currentContest().contestName;
     }
+
     return 'Naming Contests';
   }
-
   currentContent() {
     if (this.state.currentContestId) {
-      return <Contest {...this.currentContest()} />;
-  }
+      return <Contest
+               contestListClick={this.fetchContestList}
+               {...this.currentContest()} />;
+    }
+
     return <ContestList
             onContestClick={this.fetchContest}
             contests={this.state.contests} />;
   }
-
-   render() {
+  render() {
     return (
       <div className="App">
         <Header message={this.pageHeader()} />
