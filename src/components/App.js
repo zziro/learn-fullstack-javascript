@@ -27,7 +27,7 @@ class App extends React.Component {
   fetchContest = (contestId) => {
     pushState(
       { currentContestId: contestId },
-      '/contest/${contestId}'
+      `/contest/${contestId}`
     );
     api.fetchContest(contestId).then(contest => {
       this.setState({
